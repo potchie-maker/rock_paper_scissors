@@ -38,3 +38,12 @@ playRound(humanChoice, computerChoice) {
     log in console that it's a tie
     run playRound again
 }
+
+playGame(playRound) {
+  declare round variable
+  for (let i = 0, i < 5, i++) {
+    run playRound
+    increment round variable
+    log in console what round it is
+  }
+}
