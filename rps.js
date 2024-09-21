@@ -11,3 +11,26 @@ function getComputerChoice() {
   }
   return choice;
 }
+
+function getHumanChoice() {
+  let choice = prompt("Make your choice!").toUpperCase();
+  // console.log(choice);
+
+  if (choice != "ROCK" && choice != "PAPER" && choice != "SCISSORS") {
+    alert("Choice is invalid, please try again");
+    getHumanChoice();
+  } else {
+    // console.log(choice);
+    return choice;
+  }
+}
+
+let humanScore = 0;
+let computerScore = 0;
+
+const humanSelection = getHumanChoice();
+// const computerSelection = getComputerChoice();
+
+
+function playRound(humanSelection, computerSelection) {
+}

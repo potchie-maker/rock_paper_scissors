@@ -24,7 +24,7 @@ getUserChoice {
 
 declare humanScore and computerScore variables and initialize at 0
 
-playRound(humanChoice, computerChoice) {
+playRound(humanSelection, computerSelection) {
 
   
 }
