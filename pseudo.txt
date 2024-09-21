@@ -1,0 +1,30 @@
+getComputerChoice {
+
+  generate random number from 1 to 9 and store in 'rand'
+  IF rand is 1 >= 3 THEN
+    choice = rock
+  ELSE IF rand 4 >= 6 THEN
+    choice = paper
+  ELSE IF rand 7 >= 9 THEN
+    choice = scissors
+  return choice
+
+}
+
+getUserChoice {
+
+  prompt user to input choice
+  IF choice is not valid THEN
+    alert that choice is invalid
+    run getComputerChoice again
+  ELSE IF choice is valid THEN
+    return choice
+
+}
+
+declare humanScore and computerScore variables and initialize at 0
+
+playRound(humanChoice, computerChoice) {
+
+  
+}
