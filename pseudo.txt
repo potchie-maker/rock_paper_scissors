@@ -24,7 +24,17 @@ getUserChoice {
 
 declare humanScore and computerScore variables and initialize at 0
 
-playRound(humanSelection, computerSelection) {
-
+playRound(humanChoice, computerChoice) {
   
+  IF humanChoice is rock and computerChoice is scissors
+    OR humanChoice is paper and computerChoice is rock
+    OR humanChoice is scissors and computerChoice is paper THEN
+    log in console round result
+    humanChoice++
+  ELSE IF *the above, but human and computer switched* THEN
+    log in console round result
+    computerChoice++
+  ELSE IF humanChoice is equal to computerChoice THEN
+    log in console that it's a tie
+    run playRound again
 }
