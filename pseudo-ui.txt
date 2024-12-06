@@ -1,0 +1,3 @@
+I need to assign listeners as variables for each of the choices.
+
+Those buttons run into the playRound function.
