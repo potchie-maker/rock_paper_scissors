@@ -55,7 +55,8 @@ function playGame() {
       button.replaceWith(newButton);
     });
   }
-   getHumanChoice((humanChoice) => {;
+  
+  getHumanChoice((humanChoice) => {;
     if (result[0] < winLimit && result[1] < winLimit) {
       console.log(`This is round ${round}`);
       result = playRound(humanChoice, result[0], result[1]);
