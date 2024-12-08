@@ -12,65 +12,67 @@ function getComputerChoice() {
   return choice;
 }
 
-const rock = document.querySelector(".rock");
-const paper = document.querySelector(".paper");
-const scissors = document.querySelector(".scissors");
+const choices = {
+  rock: "ROCK",
+  paper: "PAPER",
+  scissors: "SCISSORS",
+}
 
 function getHumanChoice(callback) {
-  rock.addEventListener("click", () => callback("ROCK"));
-  paper.addEventListener("click", () => callback("PAPER"));
-  scissors.addEventListener("click", () => callback("SCISSORS"));
+  document.querySelector(".rock").addEventListener("click", () => callback(choices.rock));
+  document.querySelector(".paper").addEventListener("click", () => callback(choices.paper));
+  document.querySelector(".scissors").addEventListener("click", () => callback(choices.scissors));
 }
+
 
 // getHumanChoice((choice) => console.log(choice));
 
-function playRound() {
-  getHumanChoice((humanChoice) => {
-    let computerChoice = getComputerChoice();
-    let humanScore = 0;
-    let computerScore = 0;
-    if (humanChoice === computerChoice) {
-      console.log("You tied. No winners here. Go another round.");
-    } else if (humanChoice === "ROCK" && computerChoice === "PAPER") {
-      console.log("You lost. Paper beats rock. Go another round.");
-      computerScore += 1;
-    } else if (humanChoice === "ROCK" && computerChoice === "SCISSORS") {
-      console.log("You WON!!! Rock beats scissors. Go another round.");
-      humanScore += 1;
-    } else if (humanChoice === "PAPER" && computerChoice === "ROCK") {
-      console.log("You WON!!! Paper beats rock. Go another round.");
-      humanScore += 1;
-    } else if (humanChoice === "PAPER" && computerChoice === "SCISSORS") {
-      console.log("You lost. Scissors beats paper. Go another round.");
-      computerScore += 1;
-    } else if (humanChoice === "SCISSORS" && computerChoice === "ROCK") {
-      console.log("You lost. Rock beats scissors. Go another round.");
-      computerScore += 1;
-    } else if (humanChoice === "SCISSORS" && computerChoice === "PAPER") {
-      console.log("You WON!!! Scissors beats paper. Go another round.");
-      humanScore += 1;
-    }
-    // console.log [humanScore, computerScore]
-    return [humanScore, computerScore];
-  });
+function playRound(humanChoice, humanTotal, computerTotal) {
+  let computerChoice = getComputerChoice();
+  let humanScore = humanTotal;
+  let computerScore = computerTotal;
+
+  if (humanChoice === computerChoice) {
+    console.log("You tied. No winners here. Go another round.");
+  } else if (
+    (humanChoice === "ROCK" && computerChoice === "PAPER") ||
+     (humanChoice === "PAPER" && computerChoice === "SCISSORS") ||
+     (humanChoice === "SCISSORS" && computerChoice === "ROCK")
+  ) {
+     console.log(`You lost. ${computerChoice} beats ${humanChoice}. Go another round.`);
+     computerScore++;
+  } else {
+    console.log(`You WON!!! ${humanChoice} beats ${computerChoice}. Go another round.`);
+     humanScore++;
+  } 
+   // console.log [humanScore, computerScore]
+   return [humanScore, computerScore];
 }
 
-function playGame() {
+async function playGame() {
   let result = [0,0];
   let round = 1;
-  while (result[0] < 5 && result[1] < 5) {
-    result = playRound();
-    console.log(`This is round ${round}`);
-    round++;
-  }
+  await getHumanChoice((humanChoice) => {;
+    if (result[0] < 5 && result[1] < 5) {
+      console.log(`This is round ${round}`);
+      result = playRound(humanChoice, result[0], result[1]);
+      console.log(result);
+      round++;
+    }
 
-  if (result[0] > result[1]) {
-    console.log("YOU'VE WON THE MATCH!!!!! Reload the page to play again.");
-  } else if (result[0] === result[1]) {
-    console.log("The match ended in a tie. Reload the page to play again.");
-  } else {
-    console.log("You lost the match. Reload the page to play again.");
-  }
+    let winLimit = result[0] >= 5 || result[1] >= 5;
+    let scoreTied = result[0] === result[1];
+    let humanWin = result[0] > result[1];
+    let computerWin = result[0] < result[1];
+
+    if (winLimit && humanWin) {
+      console.log("YOU'VE WON THE MATCH!!!!! Reload the page to play again.");
+    } else if (winLimit && scoreTied) {
+      console.log("The match ended in a tie. Reload the page to play again.");
+    } else if (winLimit && computerWin) {
+      console.log("You lost the match. Reload the page to play again.");
+    }
+  });
 }
 
 playGame();
