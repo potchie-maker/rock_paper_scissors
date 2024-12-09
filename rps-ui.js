@@ -102,7 +102,7 @@ function playGame() {
       console.log(`Round ${round}`);
       result = playRound(humanChoice, result[0], result[1]);
       humanScoreMessage = `YOU: ${result[0]}`;
-      computerScoreMessage = `Computer: ${result[1]}`;
+      computerScoreMessage = `COMPUTER: ${result[1]}`;
       updateScore(humanScoreMessage, computerScoreMessage);
       console.log(result);
       round++;
